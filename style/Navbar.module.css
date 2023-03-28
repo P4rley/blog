@@ -1,0 +1,20 @@
+.container {
+  width: 100%;
+}
+
+.logo {
+  font-family: "Lobster", cursive;
+  font-size: 32px;
+  color: #222;
+}
+
+.write {
+  color: #767676;
+  transition: all 0.3s ease-in-out;
+  margin-right: 1.5rem;
+  z-index: 999;
+}
+
+.write:hover {
+  color: #222;
+}
