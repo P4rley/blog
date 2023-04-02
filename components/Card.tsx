@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FunctionComponent, useRef, useState } from "react";
+import { FunctionComponent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import {
   AiTwotoneLike,
@@ -13,14 +13,19 @@ import {
 } from "react-icons/bs";
 import Tag from "./Tag";
 import useClickOutside from "@/hooks/useClickOutside";
+import Link from "next/link";
 
-export interface ICard {}
+export interface ICard {
+  title: string;
+  slug: string;
+}
 
-const Card: FunctionComponent<ICard> = () => {
+const Card: FunctionComponent<ICard> = ({ title, slug }) => {
   const [like, setLike] = useState<boolean>(false);
   const [bookmarked, setBookmarked] = useState<boolean>(false);
   let [open, setOpen] = useState(false);
   const wrapperRef = useRef("menu");
+
   useClickOutside(wrapperRef, () => {
     setOpen(false);
   });
@@ -51,11 +56,8 @@ const Card: FunctionComponent<ICard> = () => {
         <Date>January 24 2023</Date>
       </UpperCard>
       <Content>
-        <Left>
-          <Title>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum,
-            vitae.
-          </Title>
+        <Left href={slug}>
+          <Title>{title}</Title>
           <Synopsis>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem
             quidem quasi a similique dignissimos quae beatae odio molestias
@@ -96,24 +98,22 @@ const Card: FunctionComponent<ICard> = () => {
           </IconWrapper>
         </BelowCardLeft>
         <BelowCardRight>
-          <Bookmark>
+          <Bookmark style={{ cursor: "pointer" }}>
             {bookmarked ? (
               <BsFillBookmarkFill
                 fontSize={20}
                 onClick={() => setBookmarked(!bookmarked)}
-                style={{ cursor: "pointer" }}
               />
             ) : (
               <BsBookmarkPlus
                 fontSize={20}
                 onClick={() => setBookmarked(!bookmarked)}
-                style={{ cursor: "pointer" }}
               />
             )}
             <BookmarkTitle>Save</BookmarkTitle>
           </Bookmark>
           <ShowLess>
-            <AiOutlineMinusCircle style={{ cursor: "pointer" }} fontSize={20} />
+            <AiOutlineMinusCircle fontSize={20} />
 
             <ButtonTitle>Show less like this</ButtonTitle>
           </ShowLess>
@@ -190,8 +190,9 @@ const Synopsis = styled.p`
   line-height: 1.4;
   letter-spacing: 0.6px;
   font-family: "Libre Baskerville", serif;
+  color: #222;
 `;
-const Left = styled.div``;
+const Left = styled(Link)``;
 const Right = styled.div``;
 const BelowCard = styled.div`
   display: flex;
@@ -289,6 +290,7 @@ const ShowLess = styled.button`
   position: relative;
   color: #aaaaaa;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 
   &:hover {
     color: #222;

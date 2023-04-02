@@ -6,17 +6,37 @@ import Card from "./Card";
 
 export interface IMainPage {}
 
+const data = [
+  {
+    title: "Test Slug 1",
+    slug: "Test Slug 1"
+      .toLowerCase()
+      .replace(/ /g, "-")
+      .replace(/[^\w-]+/g, ""),
+  },
+  {
+    title: "Test Slug 2",
+    slug: "Test Slug 2"
+      .toLowerCase()
+      .replace(/ /g, "-")
+      .replace(/[^\w-]+/g, ""),
+  },
+  {
+    title: "Test Slug 3",
+    slug: "Test Slug 3"
+      .toLowerCase()
+      .replace(/ /g, "-")
+      .replace(/[^\w-]+/g, ""),
+  },
+];
+
 const MainPage: FunctionComponent<IMainPage> = () => {
   return (
     <Container>
       <Wrapper>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {data.map((el, i) => {
+          return <Card key={i} slug={el.slug} title={el.title} />;
+        })}
       </Wrapper>
     </Container>
   );
