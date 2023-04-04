@@ -182,14 +182,13 @@ const Title = styled.h2`
   color: #222;
   font-weight: 800;
   font-size: 1.7rem;
+  font-family: "Libre Baskerville", serif;
 `;
 const Synopsis = styled.p`
   margin: 1rem 0;
-  font-size: 14px;
+  font-size: 0.85em;
   font-weight: 400;
-  line-height: 1.4;
-  letter-spacing: 0.6px;
-  font-family: "Libre Baskerville", serif;
+  line-height: 1.5;
   color: #222;
 `;
 const Left = styled(Link)``;
