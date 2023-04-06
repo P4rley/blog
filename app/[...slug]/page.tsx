@@ -33,6 +33,7 @@ const DetailPage: FunctionComponent<ISlug> = ({ params }) => {
   const { slug } = params;
 
   const [bookmarked, setBookmarked] = useState<boolean>(false);
+  const [openComment, setOpenComment] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [like, setLike] = useState<boolean>(false);
   const wrapperRef = useRef("menu");
@@ -208,7 +209,7 @@ const DetailPage: FunctionComponent<ISlug> = ({ params }) => {
                   borderRadius: "20px",
                 }}
               />
-              <IconWrapper>
+              <IconWrapper onClick={(e) => setOpenComment(true)}>
                 <BiMessageRounded fontSize={20} style={{ cursor: "pointer" }} />
                 <Number>60</Number>
               </IconWrapper>
@@ -241,9 +242,8 @@ const DetailPage: FunctionComponent<ISlug> = ({ params }) => {
             </ActionIcon>
           </Action>
         </Right>
+        <Comment openComment={openComment} setOpenComment={setOpenComment} />
       </Wrapper>
-
-      <Comment />
     </Container>
   );
 };
@@ -256,6 +256,7 @@ const Container = styled.section`
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
+  position: relative;
 `;
 const Left = styled.div`
   flex: 2.5;
@@ -482,7 +483,7 @@ const FloatingWrapper = styled.div`
   padding: 0.7rem 1rem;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
   border-radius: 40px;
-  background-color: #fff;
+  background-color: #ffffff;
   z-index: 1;
 `;
 const IconWrapper = styled.div`
